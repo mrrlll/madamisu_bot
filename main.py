@@ -9,8 +9,7 @@ import os
 # 読み込むコグ
 INITIAL_EXTENSIONS = [
     'cogs.cogs',
-    'cogs.cogs2',
-    'cogs.timer'
+    'cogs.cogs2'
 ]
 
 # botを動かすためのトークン
