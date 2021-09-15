@@ -25,4 +25,4 @@ class mycog2(commands.Cog):
 
 # Bot本体側からコグを読み込む際に呼び出される関数
 def setup(bot):
-    bot.add_cog(mycog2(bot))
+    return bot.add_cog(mycog2(bot))
