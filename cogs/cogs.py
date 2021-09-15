@@ -175,7 +175,6 @@ class mycog(commands.Cog):
         elif message.content.startswith('https://discord.com/channels/'):
             await dispand(message)
 
-
 # Bot本体側からコグを読み込む際に呼び出される関数
 def setup(bot):
     return bot.add_cog(mycog(bot))
