@@ -1,9 +1,6 @@
 # -*- coding: utf-8 -*-
 from typing import overload
 from discord import activity, channel, Embed
-from discord.enums import ActivityType
-from discord.embeds import EmptyEmbed
-from dispander.module import fetch_message_from_id
 from main import MyBot
 from discord.ext import commands
 import discord

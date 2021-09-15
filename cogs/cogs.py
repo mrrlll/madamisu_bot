@@ -8,7 +8,6 @@ from main import MyBot
 from discord.ext import commands
 import discord
 import os
-import csv
 from dispander import dispand
 import json
 import urllib.parse
