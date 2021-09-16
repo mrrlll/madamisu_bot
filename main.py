@@ -11,6 +11,7 @@ INITIAL_EXTENSIONS = [
     'cogs.cogs',
     'cogs.cogs2',
     'cogs.timer'
+    'cogs.calander'
 ]
 
 # botを動かすためのトークン
