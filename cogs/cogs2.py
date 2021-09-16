@@ -5,8 +5,6 @@ from main import MyBot
 from discord.ext import commands
 import discord
 
-
-
 # コグとして用いるクラスを定義
 class mycog2(commands.Cog):
 
