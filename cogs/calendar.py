@@ -21,7 +21,7 @@ class calendar(commands.Cog):
     async def calendar(self, ctx):
 
         # カレンダー部分のスクリーンショット
-        path = "/usr/bin/chromedriver"
+        path = "C:/bin/chromedriver"
 
         options = Options()
         options.add_argument('--headless')
@@ -42,12 +42,22 @@ class calendar(commands.Cog):
         with open ('./img.png', 'wb') as f:
             f.write(png)
 
+        # 次の月へ
+        element = driver.find_element_by_id('navForward1').click()
+        time.sleep(5)
+        png2 = driver.find_element_by_class_name('mv-container').screenshot_as_png
+
+        with open ('./img2.png', 'wb') as f:
+            f.write(png2)
+
         # カレンダーチャンネルのクリア
         channel = discord.utils.get(ctx.guild.text_channels, name = "カレンダー")
         await channel.purge()
 
         # カレンダーのキャプチャを送信
         imgpath = os.getcwd() + "/img.png"
+        await channel.send(file = discord.File(imgpath))
+        imgpath = os.getcwd() + "/img2.png"
         await channel.send(file = discord.File(imgpath))
 
         driver.close()
