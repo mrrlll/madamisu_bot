@@ -21,7 +21,8 @@ class calendar(commands.Cog):
     async def calendar(self, ctx):
 
         # カレンダー部分のスクリーンショット
-        path = "C:/bin/chromedriver"
+        #path = "C:/bin/chromedriver"
+        path = "/usr/bin/chromedriver"
 
         options = Options()
         options.add_argument('--headless')
