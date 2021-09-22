@@ -19,6 +19,8 @@ class calendar(commands.Cog):
     # コマンドの例
     @commands.command()
     async def calendar(self, ctx):
+        
+        # 時間のかかる処理なので入力中の表示
         async with ctx.typing():
 
             # カレンダー部分のスクリーンショット
