@@ -8,6 +8,8 @@ from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 import time
 import os
+import datetime
+from dateutil.relativedelta import relativedelta
 
 
 class calendar(commands.Cog):
@@ -60,9 +62,11 @@ class calendar(commands.Cog):
 
             # カレンダーのキャプチャを送信
             imgpath = os.getcwd() + "/img.png"
-            await channel.send(file = discord.File(imgpath))
+            month = datetime.datetime.now().strftime('%-m月')
+            await channel.send(month, file = discord.File(imgpath))
             imgpath = os.getcwd() + "/img2.png"
-            await channel.send(file = discord.File(imgpath))
+            next_month = datetime.datetime.now() + relativedelta(months = 1)
+            await channel.send(next_month.strftime('%-m月'), file = discord.File(imgpath))
 
             driver.close()
 
