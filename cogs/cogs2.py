@@ -17,6 +17,8 @@ class mycog2(commands.Cog):
     async def ping(self, ctx):
         await ctx.reply('pong!')
 
+    
+
 # Bot本体側からコグを読み込む際に呼び出される関数
 def setup(bot):
     return bot.add_cog(mycog2(bot))

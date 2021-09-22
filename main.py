@@ -25,7 +25,7 @@ class MyBot(commands.Bot):
     # MyBotのコンストラクタ
     def __init__(self, command_prefix):
         # スーパークラスのコンストラクタに値を渡して実行
-        super().__init__(command_prefix)
+        super().__init__(command_prefix, case_insensitive = True, help_command = None)
 
         # INITIAL_COGSに格納されている名前からコグを読み込む
         for cog in INITIAL_EXTENSIONS:

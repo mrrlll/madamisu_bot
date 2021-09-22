@@ -19,49 +19,50 @@ class calendar(commands.Cog):
     # コマンドの例
     @commands.command()
     async def calendar(self, ctx):
+        async with ctx.typing():
 
-        # カレンダー部分のスクリーンショット
-        #path = "C:/bin/chromedriver"
-        path = "/usr/bin/chromedriver"
+            # カレンダー部分のスクリーンショット
+            #path = "C:/bin/chromedriver"
+            path = "/usr/bin/chromedriver"
 
-        options = Options()
-        options.add_argument('--headless')
-        options.add_argument('--disable-gpu')
-        driver = webdriver.Chrome(options = options,executable_path = path)
-        driver.set_window_size(1920, 1080)
+            options = Options()
+            options.add_argument('--headless')
+            options.add_argument('--disable-gpu')
+            driver = webdriver.Chrome(options = options,executable_path = path)
+            driver.set_window_size(1920, 1080)
 
-        # ドライバが設定されるまでの待ち時間
-        driver.implicitly_wait(10)
+            # ドライバが設定されるまでの待ち時間
+            driver.implicitly_wait(10)
 
-        driver.get('https://calendar.google.com/calendar/embed?src=epion1516%40gmail.com&ctz=Asia%2FTokyo')
-        time.sleep(5)
+            driver.get('https://calendar.google.com/calendar/embed?src=epion1516%40gmail.com&ctz=Asia%2FTokyo')
+            time.sleep(5)
 
-        # 指定の要素をpngでキャプチャ
-        png = driver.find_element_by_class_name('mv-container').screenshot_as_png
+            # 指定の要素をpngでキャプチャ
+            png = driver.find_element_by_class_name('mv-container').screenshot_as_png
 
-        # ファイルの保存
-        with open ('./img.png', 'wb') as f:
-            f.write(png)
+            # ファイルの保存
+            with open ('./img.png', 'wb') as f:
+                f.write(png)
 
-        # 次の月へ
-        element = driver.find_element_by_id('navForward1').click()
-        time.sleep(5)
-        png2 = driver.find_element_by_class_name('mv-container').screenshot_as_png
+            # 次の月へ
+            element = driver.find_element_by_id('navForward1').click()
+            time.sleep(5)
+            png2 = driver.find_element_by_class_name('mv-container').screenshot_as_png
 
-        with open ('./img2.png', 'wb') as f:
-            f.write(png2)
+            with open ('./img2.png', 'wb') as f:
+                f.write(png2)
 
-        # カレンダーチャンネルのクリア
-        channel = discord.utils.get(ctx.guild.text_channels, name = "カレンダー")
-        await channel.purge()
+            # カレンダーチャンネルのクリア
+            channel = discord.utils.get(ctx.guild.text_channels, name = "カレンダー")
+            await channel.purge()
 
-        # カレンダーのキャプチャを送信
-        imgpath = os.getcwd() + "/img.png"
-        await channel.send(file = discord.File(imgpath))
-        imgpath = os.getcwd() + "/img2.png"
-        await channel.send(file = discord.File(imgpath))
+            # カレンダーのキャプチャを送信
+            imgpath = os.getcwd() + "/img.png"
+            await channel.send(file = discord.File(imgpath))
+            imgpath = os.getcwd() + "/img2.png"
+            await channel.send(file = discord.File(imgpath))
 
-        driver.close()
+            driver.close()
 
 
 # Bot本体側からコグを読み込む際に呼び出される関数
