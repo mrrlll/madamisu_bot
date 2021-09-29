@@ -10,6 +10,7 @@ import time
 import os
 import datetime
 from dateutil.relativedelta import relativedelta
+import asyncio
 
 
 class calendar(commands.Cog):
@@ -24,10 +25,10 @@ class calendar(commands.Cog):
         
         # 時間のかかる処理なので入力中の表示
         async with ctx.typing():
-
             # カレンダー部分のスクリーンショット
-            #path = "C:/bin/chromedriver"
             path = "/usr/bin/chromedriver"
+            path = "C:/bin/chromedriver"
+
 
             options = Options()
             options.add_argument('--headless')
@@ -39,8 +40,8 @@ class calendar(commands.Cog):
             driver.implicitly_wait(5)
 
             driver.get('https://calendar.google.com/calendar/embed?src=epion1516%40gmail.com&ctz=Asia%2FTokyo')
-            time.sleep(5)
-
+            await asyncio.sleep(5)
+            
             # 指定の要素をpngでキャプチャ
             png = driver.find_element_by_class_name('mv-container').screenshot_as_png
 
@@ -50,7 +51,7 @@ class calendar(commands.Cog):
 
             # 次の月へ
             driver.find_element_by_id('navForward1').click()
-            time.sleep(3)
+            await asyncio.sleep(3)
             png2 = driver.find_element_by_class_name('mv-container').screenshot_as_png
 
             with open('./img2.png', 'wb') as f:
@@ -60,7 +61,7 @@ class calendar(commands.Cog):
             driver.find_element_by_id('tab-controller-container-agenda').click()
             driver.set_window_size(480, 1440)
             driver.find_element_by_id('todayButton1').click()
-            time.sleep(5)
+            await asyncio.sleep(5)
             png3 = driver.find_element_by_id('eventContainer1').screenshot_as_png
 
             with open('./img3.png', 'wb') as f:
@@ -72,14 +73,13 @@ class calendar(commands.Cog):
 
             # カレンダーのキャプチャを送信
             imgpath = os.getcwd() + "/img.png"
-            month = datetime.datetime.now().strftime('%-m月')
+            month = datetime.datetime.now().strftime('%m月')
             await channel.send(month, file = discord.File(imgpath))
             imgpath = os.getcwd() + "/img2.png"
             next_month = datetime.datetime.now() + relativedelta(months = 1)
-            await channel.send(next_month.strftime('%-m月'), file = discord.File(imgpath))
+            await channel.send(next_month.strftime('%m月'), file = discord.File(imgpath))
             imgpath = os.getcwd() + "/img3.png"
             await channel.send("リスト", file = discord.File(imgpath))
-
 
             driver.close()
 
