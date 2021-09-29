@@ -36,7 +36,7 @@ class calendar(commands.Cog):
             driver.set_window_size(1920, 1080)
 
             # ドライバが設定されるまでの待ち時間
-            driver.implicitly_wait(10)
+            driver.implicitly_wait(5)
 
             driver.get('https://calendar.google.com/calendar/embed?src=epion1516%40gmail.com&ctz=Asia%2FTokyo')
             time.sleep(5)
@@ -45,16 +45,26 @@ class calendar(commands.Cog):
             png = driver.find_element_by_class_name('mv-container').screenshot_as_png
 
             # ファイルの保存
-            with open ('./img.png', 'wb') as f:
+            with open('./img.png', 'wb') as f:
                 f.write(png)
 
             # 次の月へ
-            element = driver.find_element_by_id('navForward1').click()
-            time.sleep(5)
+            driver.find_element_by_id('navForward1').click()
+            time.sleep(3)
             png2 = driver.find_element_by_class_name('mv-container').screenshot_as_png
 
-            with open ('./img2.png', 'wb') as f:
+            with open('./img2.png', 'wb') as f:
                 f.write(png2)
+
+            # 予定リスト
+            driver.find_element_by_id('tab-controller-container-agenda').click()
+            driver.set_window_size(480, 1440)
+            driver.find_element_by_id('todayButton1').click()
+            time.sleep(5)
+            png3 = driver.find_element_by_id('eventContainer1').screenshot_as_png
+
+            with open('./img3.png', 'wb') as f:
+                f.write(png3)
 
             # カレンダーチャンネルのクリア
             channel = discord.utils.get(ctx.guild.text_channels, name = "カレンダー")
@@ -66,7 +76,10 @@ class calendar(commands.Cog):
             await channel.send(month, file = discord.File(imgpath))
             imgpath = os.getcwd() + "/img2.png"
             next_month = datetime.datetime.now() + relativedelta(months = 1)
-            await channel.send(next_month.strftime('%-m月'), file = discord.File(imgpath))
+            await channel.send(next_month.strftime('%m-月'), file = discord.File(imgpath))
+            imgpath = os.getcwd() + "/img3.png"
+            await channel.send("リスト", file = discord.File(imgpath))
+
 
             driver.close()
 
