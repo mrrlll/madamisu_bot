@@ -76,7 +76,7 @@ class calendar(commands.Cog):
             await channel.send(month, file = discord.File(imgpath))
             imgpath = os.getcwd() + "/img2.png"
             next_month = datetime.datetime.now() + relativedelta(months = 1)
-            await channel.send(next_month.strftime('%m-月'), file = discord.File(imgpath))
+            await channel.send(next_month.strftime('%-m月'), file = discord.File(imgpath))
             imgpath = os.getcwd() + "/img3.png"
             await channel.send("リスト", file = discord.File(imgpath))
 
