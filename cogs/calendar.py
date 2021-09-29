@@ -27,7 +27,7 @@ class calendar(commands.Cog):
         async with ctx.typing():
             # カレンダー部分のスクリーンショット
             path = "/usr/bin/chromedriver"
-            path = "C:/bin/chromedriver"
+            #path = "C:/bin/chromedriver"
 
 
             options = Options()
@@ -73,11 +73,11 @@ class calendar(commands.Cog):
 
             # カレンダーのキャプチャを送信
             imgpath = os.getcwd() + "/img.png"
-            month = datetime.datetime.now().strftime('%m月')
+            month = datetime.datetime.now().strftime('%m-月')
             await channel.send(month, file = discord.File(imgpath))
             imgpath = os.getcwd() + "/img2.png"
             next_month = datetime.datetime.now() + relativedelta(months = 1)
-            await channel.send(next_month.strftime('%m月'), file = discord.File(imgpath))
+            await channel.send(next_month.strftime('%m-月'), file = discord.File(imgpath))
             imgpath = os.getcwd() + "/img3.png"
             await channel.send("リスト", file = discord.File(imgpath))
 
