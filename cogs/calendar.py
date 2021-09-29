@@ -73,7 +73,7 @@ class calendar(commands.Cog):
 
             # カレンダーのキャプチャを送信
             imgpath = os.getcwd() + "/img.png"
-            month = datetime.datetime.now().strftime('%m-月')
+            month = datetime.datetime.now().strftime('%-m月')
             await channel.send(month, file = discord.File(imgpath))
             imgpath = os.getcwd() + "/img2.png"
             next_month = datetime.datetime.now() + relativedelta(months = 1)
