@@ -98,8 +98,8 @@ class mycog(commands.Cog):
         if ctx.message.author.bot:
             return
         else:
-            status = ctx.message.content.replace("!status ", "")
-            await self.bot.change_presence(activity = discord.Game(name = status, type = 1))
+            status = ctx.message.content.split(" ")
+            await self.bot.change_presence(activity = discord.Game(name = status[1], type = 1))
     
     # DeepL APIを使った翻訳
     @commands.command()
