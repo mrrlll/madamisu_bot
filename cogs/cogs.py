@@ -57,7 +57,7 @@ class mycog(commands.Cog):
                 }
 
             # 各テキストチャンネルの作成
-            channel = await guild.create_text_channel(name, overwrites = overwrites, category = category)
+            await category.create_text_channel(name, overwrites = overwrites)
 
 
 

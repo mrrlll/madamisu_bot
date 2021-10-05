@@ -1,5 +1,6 @@
 cogs/file/token.txt
 cogs/file/config.json
+cogs/file/chromedriver
 __pycache__
 /cogs/__pycache__
 img.png

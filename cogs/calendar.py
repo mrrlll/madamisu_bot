@@ -26,7 +26,7 @@ class calendar(commands.Cog):
         # 時間のかかる処理なので入力中の表示
         async with ctx.typing():
             # カレンダー部分のスクリーンショット
-            path = "/usr/bin/chromedriver"
+            path = "./cogs/file/chromedriver"
             #path = "C:/bin/chromedriver"
 
 
