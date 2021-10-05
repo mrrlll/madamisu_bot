@@ -13,6 +13,7 @@ import json
 import urllib.parse
 import urllib.request
 import re
+import datetime
 
 
 regex_discord_message_url = (
@@ -34,8 +35,26 @@ class mycog(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
+    # コマンド使用のログ
+    def log(ctx):
+        log = ['----------------------------', datetime.datetime.now().strftime('%Y/%m/%d  %H:%M:%S'), ctx.author.id, ctx.author.name, ctx.message.content]
+        
+        print(log[0])
+        print(log[1])
+        print(log[2])
+        print(log[3])
+        print(log[4])
+        print(log[0])
+
+        with open('./log.txt', 'a', encoding = 'utf-8') as f:
+            for data in log:
+                f.write("%s\n" % data)
+
     @commands.command()
     async def c(self, ctx):
+        
+        mycog.log(ctx)
+
         guild = ctx.guild
         cmd = ctx.message.content.replace('!c ', '').replace('　', ' ').replace('、', ',').split(',')
         
@@ -89,12 +108,14 @@ class mycog(commands.Cog):
     # テキストチャンネルのお掃除
     @commands.command()
     async def clean(self, ctx):
+        mycog.log(ctx)
         if ctx.message.author.guild_permissions.administrator:
             await ctx.message.channel.purge()
 
     # !status ○○でステータスの変更
     @commands.command()
     async def status(self, ctx):
+        mycog.log(ctx)
         if ctx.message.author.bot:
             return
         else:
@@ -104,6 +125,7 @@ class mycog(commands.Cog):
     # DeepL APIを使った翻訳
     @commands.command()
     async def translate(self, ctx):
+        mycog.log(ctx)
         messages = []
         translatetxt = ctx.message.content.split(' ', 1)
         if ctx.message.author.bot:
